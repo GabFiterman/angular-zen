@@ -14,12 +14,14 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GalleryListComponent } from './components/gallery-list/gallery-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    GalleryComponent
+    GalleryComponent,
+    GalleryListComponent
   ],
   imports: [
     BrowserModule,

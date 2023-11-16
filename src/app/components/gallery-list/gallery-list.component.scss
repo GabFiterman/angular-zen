@@ -1,0 +1,10 @@
+.album-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.album-card {
+  margin: 15px;
+  width: 300px;
+}
