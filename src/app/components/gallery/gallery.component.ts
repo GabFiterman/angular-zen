@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GalleryService } from '../../services/gallery.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-gallery',
@@ -9,10 +10,17 @@ import { GalleryService } from '../../services/gallery.service';
 export class GalleryComponent implements OnInit {
   albums: any[] = [];
 
-  constructor(private galleryService: GalleryService) {}
+  constructor(
+    private galleryService: GalleryService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.getAlbums();
+  }
+
+  onLogout(): void {
+    this.authService.logout();
   }
 
   getAlbums() {

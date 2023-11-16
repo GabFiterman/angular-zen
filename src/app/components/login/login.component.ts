@@ -1,6 +1,7 @@
+// login.component.ts
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 interface User {
   username: string;
@@ -14,13 +15,15 @@ interface User {
 })
 export class LoginComponent implements OnInit {
   hide: boolean = true;
-  isLoggedIn: boolean = false;
+  loginForm: FormGroup = this.fb.group({
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   ngOnInit() {
     const existingUserString = localStorage.getItem('user');
-    const isLoggedInString = localStorage.getItem('isLoggedIn');
 
     if (!existingUserString) {
       const newUser: User = {
@@ -31,16 +34,7 @@ export class LoginComponent implements OnInit {
       const newUserString = JSON.stringify(newUser);
       localStorage.setItem('user', newUserString);
     }
-
-    if (isLoggedInString) {
-      this.isLoggedIn = JSON.parse(isLoggedInString);
-    }
   }
-
-  loginForm: FormGroup = this.fb.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-  });
 
   onLogin() {
     if (!this.loginForm.valid) {
@@ -54,10 +48,7 @@ export class LoginComponent implements OnInit {
       enteredUser.password === 'password'
     ) {
       console.log('Login bem-sucedido!');
-      this.isLoggedIn = true;
-
-      localStorage.setItem('isLoggedIn', JSON.stringify(this.isLoggedIn));
-      this.router.navigate(['/gallery']);
+      this.authService.login();
     } else {
       alert('Credenciais inválidas. Tente novamente.');
     }
@@ -65,8 +56,6 @@ export class LoginComponent implements OnInit {
 
   onLogout() {
     this.loginForm.reset();
-    this.isLoggedIn = false;
-
-    localStorage.setItem('isLoggedIn', JSON.stringify(this.isLoggedIn));
+    this.authService.logout();
   }
 }
