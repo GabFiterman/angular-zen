@@ -13,11 +13,13 @@ interface User {
 })
 export class LoginComponent implements OnInit {
   hide: boolean = true;
+  isLoggedIn: boolean = false;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     const existingUserString = localStorage.getItem('user');
+    const isLoggedInString = localStorage.getItem('isLoggedIn');
 
     if (!existingUserString) {
       const newUser: User = {
@@ -27,6 +29,10 @@ export class LoginComponent implements OnInit {
 
       const newUserString = JSON.stringify(newUser);
       localStorage.setItem('user', newUserString);
+    }
+
+    if (isLoggedInString) {
+      this.isLoggedIn = JSON.parse(isLoggedInString);
     }
   }
 
@@ -44,8 +50,18 @@ export class LoginComponent implements OnInit {
 
     if (enteredUser.username === 'Jhon_Doe' && enteredUser.password === 'password') {
       console.log('Login bem-sucedido!');
+      this.isLoggedIn = true;
+
+      localStorage.setItem('isLoggedIn', JSON.stringify(this.isLoggedIn));
     } else {
       console.log('Credenciais inválidas. Tente novamente.');
     }
+  }
+
+  onLogout() {
+    this.loginForm.reset();
+    this.isLoggedIn = false;
+
+    localStorage.setItem('isLoggedIn', JSON.stringify(this.isLoggedIn));
   }
 }
