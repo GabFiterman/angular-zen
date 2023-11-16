@@ -1,27 +1,61 @@
 # AngularZen
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.18.
+Este é um aplicativo Angular simples que utiliza o Angular Material para criar uma interface de usuário amigável.
+O aplicativo permite aos usuários autenticar-se, visualizar uma galeria de álbuns e, em seguida, visualizar detalhes e fotos específicos de cada álbum.
 
-## Development server
+## Recursos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- **Autenticação Simples**: Os usuários podem fazer login com um nome de usuário e senha predefinidos.
+- **Galeria de Álbuns**: Os usuários autenticados podem visualizar uma lista de álbuns. Cada álbum é exibido como um cartão com um título e um botão para ver detalhes.
+- **Detalhes do Álbum**: Ao clicar no botão "Detalhes" em um álbum, os usuários podem ver mais informações sobre o álbum.
+- **Visualização de Fotos**: Os usuários podem clicar no botão para visualizar as 10 primeiras fotos do álbum em uma página de detalhes separada.
 
-## Code scaffolding
+# Como Executar o Projeto
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**Clone o Repositório**: Clone este repositório em sua máquina local usando o seguinte comando:
 
-## Build
+```bash
+git clone https://github.com/seu-usuario/nome-do-repositorio.git
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+**Instale as Dependências**: Navegue até o diretório do projeto e instale as dependências utilizando o npm:
 
-## Running unit tests
+```bash
+cd nome-do-repositorio
+npm install
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**Execute o Aplicativo**: Inicie o servidor de desenvolvimento Angular com o seguinte comando:
 
-## Running end-to-end tests
+```bash
+ng serve
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+O aplicativo estará disponível em `http://localhost:4200`. Abra este link em seu navegador para visualizar o aplicativo.
 
-## Further help
+## Login
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- **usuário**: Jhon_Doe
+- **Senha**: password
+
+# Estrutura do Projeto
+
+- `src/app/components/login`: Contém o componente e serviços relacionados à autenticação.
+
+- `src/app/components/gallery`: Contém componentes relacionados à exibição da galeria de álbuns.
+
+- `src/app/components/gallery-detail`: Contém componentes relacionados à exibição detalhada de álbuns e fotos.
+
+- `src/app/services`: Contém serviços utilizados para buscar dados da API.
+
+- `src/app/shared`: Contém componentes, serviços ou módulos compartilhados por toda a aplicação.
+
+- `src/app/app-routing.module.ts`: Define as rotas da aplicação.
+
+## Contribuindo
+
+Sinta-se à vontade para contribuir para o desenvolvimento deste aplicativo. Se você encontrar problemas ou tiver sugestões, abra uma issue.
+
+## Licença
+
+Este projeto é licenciado sob a Licença MIT - veja o arquivo LICENSE para detalhes.
