@@ -1,7 +1,5 @@
-// login.component.ts
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 interface User {
   username: string;
@@ -15,15 +13,13 @@ interface User {
 })
 export class LoginComponent implements OnInit {
   hide: boolean = true;
-  loginForm: FormGroup = this.fb.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-  });
+  isLoggedIn: boolean = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     const existingUserString = localStorage.getItem('user');
+    const isLoggedInString = localStorage.getItem('isLoggedIn');
 
     if (!existingUserString) {
       const newUser: User = {
@@ -34,7 +30,16 @@ export class LoginComponent implements OnInit {
       const newUserString = JSON.stringify(newUser);
       localStorage.setItem('user', newUserString);
     }
+
+    if (isLoggedInString) {
+      this.isLoggedIn = JSON.parse(isLoggedInString);
+    }
   }
+
+  loginForm: FormGroup = this.fb.group({
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
 
   onLogin() {
     if (!this.loginForm.valid) {
@@ -43,19 +48,20 @@ export class LoginComponent implements OnInit {
 
     const enteredUser = this.loginForm.value as User;
 
-    if (
-      enteredUser.username === 'Jhon_Doe' &&
-      enteredUser.password === 'password'
-    ) {
+    if (enteredUser.username === 'Jhon_Doe' && enteredUser.password === 'password') {
       console.log('Login bem-sucedido!');
-      this.authService.login();
+      this.isLoggedIn = true;
+
+      localStorage.setItem('isLoggedIn', JSON.stringify(this.isLoggedIn));
     } else {
-      alert('Credenciais inválidas. Tente novamente.');
+      console.log('Credenciais inválidas. Tente novamente.');
     }
   }
 
   onLogout() {
     this.loginForm.reset();
-    this.authService.logout();
+    this.isLoggedIn = false;
+
+    localStorage.setItem('isLoggedIn', JSON.stringify(this.isLoggedIn));
   }
 }
