@@ -17,4 +17,9 @@ export class GalleryService {
 
     return this.http.get<any[]>(url);
   }
+
+  getPhotos(albumId: number, limit: number = 10): Observable<any[]> {
+    const url = `${this.apiUrl}/albums/${albumId}/photos?_limit=${limit}`;
+    return this.http.get<any[]>(url);
+  }
 }
