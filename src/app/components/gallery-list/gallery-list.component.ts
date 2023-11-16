@@ -13,11 +13,11 @@ export class GalleryListComponent implements OnInit {
   constructor(private galleryService: GalleryService) {}
 
   ngOnInit() {
-    this.loadAlbums();
+    this.loadAlbums(1);
   }
 
-  private loadAlbums() {
-    this.galleryService.getAlbums().subscribe(
+  private loadAlbums(userId: number) {
+    this.galleryService.getAlbums(userId).subscribe(
       (albums) => {
         this.albums = albums;
       },
