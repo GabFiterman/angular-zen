@@ -6,11 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class GalleryService {
-  private apiUrl = 'https://jsonplaceholder.typicode.com/albums';
+  private apiUrl = 'https://jsonplaceholder.typicode.com';
 
   constructor(private http: HttpClient) {}
 
-  getAlbums(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getAlbums(userId?: number): Observable<any[]> {
+    const url = userId
+      ? `${this.apiUrl}/users/${userId}/albums`
+      : `${this.apiUrl}/albums`;
+
+    return this.http.get<any[]>(url);
   }
 }
