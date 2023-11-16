@@ -1,20 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+interface User {
+  username: string;
+  password: string;
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  hide: boolean = false;
+  hide: boolean = true;
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const existingUserString = localStorage.getItem('user');
+
+    if (!existingUserString) {
+      const newUser: User = {
+        username: 'Jhon_Doe',
+        password: 'password',
+      };
+
+      const newUserString = JSON.stringify(newUser);
+      localStorage.setItem('user', newUserString);
+    }
+  }
 
   loginForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    username: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
@@ -22,6 +39,13 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       return;
     }
-    console.log(this.loginForm.value);
+
+    const enteredUser = this.loginForm.value as User;
+
+    if (enteredUser.username === 'Jhon_Doe' && enteredUser.password === 'password') {
+      console.log('Login bem-sucedido!');
+    } else {
+      console.log('Credenciais inválidas. Tente novamente.');
+    }
   }
 }
