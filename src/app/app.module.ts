@@ -15,13 +15,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GalleryListComponent } from './components/gallery-list/gallery-list.component';
+import { GalleryDetailComponent } from './components/gallery-detail/gallery-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     GalleryComponent,
-    GalleryListComponent
+    GalleryListComponent,
+    GalleryDetailComponent
   ],
   imports: [
     BrowserModule,
