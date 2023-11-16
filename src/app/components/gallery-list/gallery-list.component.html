@@ -2,12 +2,9 @@
   <div *ngFor="let album of albums" class="album-card">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{ album.title }}</mat-card-title>
+        <mat-card-title  style="font-size: 1em;">{{ album.title }}</mat-card-title>
       </mat-card-header>
       <img mat-card-image [src]="getThumbnailUrl(album.id)" alt="{{ album.title }} Thumbnail" />
-      <mat-card-content>
-        <p>{{ album.userId }}</p>
-      </mat-card-content>
       <mat-card-actions>
         <button mat-button color="primary">Ver Detalhes</button>
       </mat-card-actions>
