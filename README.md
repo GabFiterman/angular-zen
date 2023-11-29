@@ -15,7 +15,7 @@ O aplicativo permite aos usuários autenticar-se, visualizar uma galeria de álb
 **Clone o Repositório**: Clone este repositório em sua máquina local usando o seguinte comando:
 
 ```bash
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/GabFiterman/angular-zen.git
 ```
 
 **Instale as Dependências**: Navegue até o diretório do projeto e instale as dependências utilizando o npm:
